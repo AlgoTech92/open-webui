@@ -44,6 +44,45 @@ class ModelMeta(BaseModel):
 
     capabilities: Optional[dict] = None
 
+    # === AISYNCAPP MODIFICATION START ===
+    # Date: 2024-04-28
+    # Author: AiSyncapp Team (via Hermes Agent)
+    # Purpose: Add AiSyncapp "AI Employee / Digital Labor" fields to ModelMeta
+    # Rollback: Remove everything between START and END comments below
+
+    # Domain/vertical this AI Employee operates in (e.g., "real-estate", "medical", "e-commerce")
+    domain: Optional[str] = None
+
+    # List of skill tags this AI Employee has (e.g., ["transaction-coordination", "lead-qualification"])
+    skills: Optional[list[str]] = []
+
+    # Hourly/monthly rate in dollars (e.g., 400 for $400/mo)
+    hourly_rate: Optional[int] = None
+
+    # Short bio/introduction for the AI Employee
+    bio: Optional[str] = None
+
+    # Experience level: "junior", "senior", "principal"
+    experience_level: Optional[str] = None
+
+    # Flag to identify this as an AI Employee (vs regular chat model)
+    is_ai_employee: Optional[bool] = False
+
+    # === CHANGE #2: Integration Fields (Qdrant, n8n, Supabase) ===
+    # Date: 2024-04-28
+    # Links to self-hosted/cloud infrastructure for this AI Employee
+
+    # Qdrant vector collection ID for this employee's domain knowledge
+    qdrant_collection_id: Optional[str] = None
+
+    # n8n workflow ID to trigger when this employee is hired/onboarded
+    n8n_onboarding_workflow_id: Optional[str] = None
+
+    # Supabase table or record ID storing this employee's contracts/audit logs
+    supabase_profile_table: Optional[str] = None
+
+    # === AISYNCAPP MODIFICATION END ===
+
     model_config = ConfigDict(extra='allow')
 
     @model_validator(mode='before')
